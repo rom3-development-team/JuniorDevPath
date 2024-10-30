@@ -13,6 +13,12 @@
         android:theme="@style/Theme.JrDeveloper"
         tools:targetApi="31">
         <activity
+            android:name=".Banking"
+            android:exported="false"
+            android:label="@string/banking"
+            android:theme="@style/Theme.AppCompat.Light" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
