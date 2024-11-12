@@ -1,20 +1,41 @@
 package com.example.jrdeveloper
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+class BankAccount (
+    private val accountNumber: String,
+    private val accountHolder: String,
+    private var balance: Double
+) {
 
-class Banking : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_banking)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+    fun getAccountNumber(): String {
+        return accountNumber
+    }
+
+    fun getAccountHolder(): String {
+        return accountHolder
+    }
+
+    fun getBalance(): Double {
+        return balance
+    }
+
+    // Add funds to the account
+    fun deposit(amount: Double): Boolean {
+        if (amount > 0) {
+            balance += amount
+            return true
+        } else {
+            return false
+
+        }
+    }
+
+    // Subtracts funds if there are sufficient funds
+    fun withdraw(amount: Double): Boolean {
+        if (amount > 0 && amount <= getBalance()) {
+            balance -= amount
+            return true
+        } else {
+            return false
         }
     }
 }
