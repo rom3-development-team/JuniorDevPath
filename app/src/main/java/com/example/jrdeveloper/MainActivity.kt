@@ -34,7 +34,6 @@ class MainActivity : ComponentActivity() {
         Log.d(bankObserver.lifecycle_tag, "OnCreate called")
         lifecycleState.text = "Activity is being created (onCreate)"
 
-
         initialBalance = savedInstanceState?.getDouble("balance") ?: 5000.95
 
 //        val bank = BankAccount(
