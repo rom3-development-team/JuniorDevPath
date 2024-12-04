@@ -9,31 +9,39 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import kotlin.properties.Delegates
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var bank: BankAccount
+    // private lateinit var bank: BankAccount
     private val bankObserver = BankLifecycleObserver()
-    private val lifecycleState: TextView = findViewById(R.id.LifecycleState)
-   // private val tag = "Lifecycle "
+    private lateinit var lifecycleState: TextView
+    private var initialBalance: Double = 5000.95
+
+    val bank = BankAccount(
+        accountNumber = "1234",
+        accountHolder = "John Smith",
+        balance = initialBalance
+    )
 
     @SuppressLint("SetTextI18n")
     // onCreate() is the method that is called when the activity is first created.
     // Where you initialize your activity and UI components.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_banking)
+        lifecycleState = findViewById(R.id.LifecycleState)
         Log.d(bankObserver.lifecycle_tag, "OnCreate called")
         lifecycleState.text = "Activity is being created (onCreate)"
-        setContentView(R.layout.activity_banking)
-
-        val initialBalance = savedInstanceState?.getDouble("balance") ?: 5000.95
 
 
-        val bank = BankAccount(
-            accountNumber = "1234",
-            accountHolder = "John Smith",
-            balance = initialBalance
-        )
+        initialBalance = savedInstanceState?.getDouble("balance") ?: 5000.95
+
+//        val bank = BankAccount(
+//            accountNumber = "1234",
+//            accountHolder = "John Smith",
+//            balance = initialBalance
+//        )
 
         // UI element references
         val amountEditText: EditText = findViewById(R.id.amountEditText)
@@ -58,23 +66,27 @@ class MainActivity : ComponentActivity() {
                 accountBalanceTextView.text = "Balance: $${accountBalance}"
                 Toast.makeText(this, "Deposit successful", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Invalid deposit amount. Please enter a valid amount.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Invalid deposit amount. Please enter a valid amount.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
 
             // Withdraw Button click listener
-            withdrawButton.setOnClickListener {
-                val amount = amountEditText.text.toString().toDouble()
-                if (bank.withdraw(amount)) {
-                    accountBalanceTextView.text = "Balance: $${accountBalance}"
-                    Toast.makeText(this, "Withdraw successful", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Insufficient funds or invalid amount. Please enter a valid amount.", Toast.LENGTH_SHORT).show()
-                    }
-                }
+        withdrawButton.setOnClickListener {
+            val amount = amountEditText.text.toString().toDouble()
+            if (bank.withdraw(amount)) {
+                accountBalanceTextView.text = "Balance: $${accountBalance}"
+                Toast.makeText(this, "Withdraw successful", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Insufficient funds or invalid amount. Please enter a valid amount.", Toast.LENGTH_SHORT).show()
             }
-
-
         }
+    }
+
+
 
     // The onSaveInstanceState() methods saves important UI state data before an activity may be destroyed or recreated.
     // Saving a double value representing the bank balance to the Bundle object so it can be restored later.
