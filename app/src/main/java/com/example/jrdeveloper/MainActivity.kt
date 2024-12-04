@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
         accountHolderTextView.text = "Account Holder: $accountHolder"
 
         // Sets the account balance value to the text view
-        val accountBalance = bank.getBalance()
+        var accountBalance = bank.getBalance()
         val accountBalanceTextView: TextView = findViewById(R.id.balanceTextView)
         accountBalanceTextView.text = "Balance: $${accountBalance}"
 
@@ -62,6 +62,7 @@ class MainActivity : ComponentActivity() {
         depositButton.setOnClickListener {
             val amount = amountEditText.text.toString().toDouble()
             if (bank.deposit(amount)) {
+                accountBalance+=amount
                 accountBalanceTextView.text = "Balance: $${accountBalance}"
                 Toast.makeText(this, "Deposit successful", Toast.LENGTH_SHORT).show()
             } else {
@@ -77,6 +78,7 @@ class MainActivity : ComponentActivity() {
         withdrawButton.setOnClickListener {
             val amount = amountEditText.text.toString().toDouble()
             if (bank.withdraw(amount)) {
+                accountBalance-=amount
                 accountBalanceTextView.text = "Balance: $${accountBalance}"
                 Toast.makeText(this, "Withdraw successful", Toast.LENGTH_SHORT).show()
             } else {
