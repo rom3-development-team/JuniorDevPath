@@ -1,3 +1,4 @@
+# Android Studio & IntelliJ project files
 *.iml
 .gradle
 /local.properties
@@ -7,9 +8,27 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+
+# macOS & Windows
 .DS_Store
+Thumbs.db
+
+# Build folders
 /build
-/captures
-.externalNativeBuild
+/app/build
 .cxx
+.externalNativeBuild
+
+# Captures folder for screenshots
+/captures
+
+# Signing and environment-specific properties
 local.properties
+*.keystore
+
+# Crashlytics and Firebase files
+fabric.properties
+crashlytics.properties
+
+# Log files
+*.log
