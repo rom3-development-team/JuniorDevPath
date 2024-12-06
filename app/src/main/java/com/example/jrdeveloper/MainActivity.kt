@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
     val bank = BankAccount(
         accountNumber = "1234",
-        accountHolder = "John Smith",
+        accountHolder = "Madelene Mejia",
         balance = initialBalance
     )
 
@@ -35,12 +35,6 @@ class MainActivity : ComponentActivity() {
         lifecycleState.text = "Activity is being created (onCreate)"
 
         initialBalance = savedInstanceState?.getDouble("balance") ?: 5000.95
-
-//        val bank = BankAccount(
-//            accountNumber = "1234",
-//            accountHolder = "John Smith",
-//            balance = initialBalance
-//        )
 
         // UI element references
         val amountEditText: EditText = findViewById(R.id.amountEditText)

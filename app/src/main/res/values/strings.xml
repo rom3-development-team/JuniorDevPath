@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">JrDeveloper</string>
     <string name="banking">Banking</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="deposit">Deposit</string>
+    <string name="please_enter_an_amount">Please enter an amount</string>
 </resources>

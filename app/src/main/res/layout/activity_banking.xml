@@ -9,26 +9,33 @@
 
     <TextView
         android:id="@+id/holderTextView"
-        android:layout_width= "wrap_content"
+        android:textColor="#000000"
+        android:textSize="20.sp"
+        android:padding="16.dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintTop_toTopOf= "parent"
-        app:layout_constraintBottom_toTopOf= "@id/balanceTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/balanceTextView"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/balanceTextView"
+        android:textColor="#000000"
+        android:textSize="24.sp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintTop_toBottomOf= "@id/holderTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/holderTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf= "@id/balanceTextView"/>
+        app:layout_constraintBottom_toTopOf="@id/balanceTextView"/>
 
     <EditText
         android:id="@+id/amountEditText"
         android:layout_width="wrap_content"
         android:autofillHints=""
+        android:hint="@string/please_enter_an_amount"
         android:labelFor="@id/balanceTextView"
         android:inputType="numberDecimal"
         android:layout_height="wrap_content"
@@ -40,6 +47,9 @@
 
     <Button
         android:id="@+id/depositButton"
+        android:text="@string/deposit"
+        android:textColor="#0936FF"
+        android:textStyle="bold"
         android:layout_width= "wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf= "parent"
@@ -49,6 +59,9 @@
 
     <Button
         android:id="@+id/withdrawButton"
+        android:text="@string/withdraw"
+        android:textColor="#E4080A"
+        android:textStyle="bold"
         android:layout_width= "wrap_content"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="74dp"
