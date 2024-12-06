@@ -18,11 +18,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var lifecycleState: TextView
     private var initialBalance: Double = 5000.95
 
-    val bank = BankAccount(
-        accountNumber = "1234",
-        accountHolder = "Madelene Mejia",
-        balance = initialBalance
-    )
+    private lateinit var bank : BankAccount
 
     @SuppressLint("SetTextI18n")
     // onCreate() is the method that is called when the activity is first created.
@@ -35,6 +31,12 @@ class MainActivity : ComponentActivity() {
         lifecycleState.text = "Activity is being created (onCreate)"
 
         initialBalance = savedInstanceState?.getDouble("balance") ?: 5000.95
+
+        bank = BankAccount(
+            accountNumber = "1234",
+            accountHolder = "Madelene Mejia",
+            balance = initialBalance
+        )
 
         // UI element references
         val amountEditText: EditText = findViewById(R.id.amountEditText)
