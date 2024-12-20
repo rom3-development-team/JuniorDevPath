@@ -7,9 +7,12 @@ class MainActivity : AppCompatActivity() { // Change from ComponentActivity to A
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banking)
 
+        val loginFragment = LoginFragment()
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.flFragment, LoginFragment())
+            .replace(R.id.flFragment, loginFragment)
             .commit()
+
 //
 //      supportFragmentManager.beginTransaction()
 //          .replace(R.id.flFragment, secondFragment)

@@ -10,10 +10,13 @@
     >
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner"
+        android:padding="60dp"
+        android:backgroundTint="#3CE7CFFF">
 
         <ImageView
             android:layout_width="160dp"
@@ -21,7 +24,7 @@
             android:src="@drawable/icon_account_circle" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/username"
@@ -36,7 +39,7 @@
             android:id="@+id/username_input"/>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/password"
@@ -52,7 +55,7 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="@string/login"
@@ -61,14 +64,19 @@
             tools:layout_editor_absoluteY="401dp"
             android:background="@drawable/rounded_corner"
             android:textColor="@color/purple_500"
+            android:textSize="20sp"
            />
 
         <TextView
             android:id="@+id/errorTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textColor="#E90C0C"
-            android:visibility="gone"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:paddingTop="30dp"/>
 
         </LinearLayout>
 

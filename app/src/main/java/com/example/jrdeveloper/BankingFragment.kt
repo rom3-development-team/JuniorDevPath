@@ -33,6 +33,7 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
 //        Log.d(bankObserver.lifecycle_tag, "OnCreate called")
 //        lifecycleState.text = "Activity is being created (onCreate)"
 
+
         initialBalance = savedInstanceState?.getDouble("balance") ?: 5000.95
 
         bank = BankAccount(
@@ -40,6 +41,7 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
             accountHolder = "Madelene Mejia",
             balance = initialBalance
         )
+        val username = arguments?.getString("username")
 
         // UI element references
         val amountEditText: EditText = view.findViewById(R.id.amountEditText)
@@ -49,7 +51,7 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
         // Sets the account holder value to the text view
         val accountHolder = bank.getAccountHolder()
         val accountHolderTextView: TextView = view.findViewById(R.id.holderTextView)
-        accountHolderTextView.text = "Account Holder: $accountHolder"
+        accountHolderTextView.text = "Account Holder: $username"
 
         // Sets the account balance value to the text view
         var accountBalance = bank.getBalance()
