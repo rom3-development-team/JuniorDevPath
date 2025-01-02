@@ -19,7 +19,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
 
-    val secondFragment = BankingFragment()
+    val bankingFragment = BankingFragment()
 
 
     @SuppressLint("SetTextI18n")
@@ -39,31 +39,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (username == "admin" && password == "password") {
                 val args = Bundle()
                 args.putString("username", username)
-                secondFragment.arguments = args
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.flFragment, secondFragment)
-                    .commit()
+                bankingFragment.arguments = args
+//                parentFragmentManager.beginTransaction()
+//                    .replace(R.id.flFragment, secondFragment)
+//                    .commit()
+                (activity as? MainActivity)?.navigateToFragment(bankingFragment)
             } else {
                 errorTextView.text = "Invalid Credentials"
                 errorTextView.visibility = view.visibility
             }
 
         }
-//        loginButton.setOnClickListener{
-//            val username = usernameEditText.text.toString()
-//            val password = passwordEditText.text.toString()
-//
-//            if (username == "admin" && password == "password") {
-//                parentFragmentManager.beginTransaction()
-//                    .replace(R.id.flFragment, secondFragment)
-//                    .commit()
-//            } else {
-//                errorTextView.text = "Invalid Credentials"
-//                errorTextView.visibility = view.visibility
-//            }
-//
-//        }
-
     }
 
     }

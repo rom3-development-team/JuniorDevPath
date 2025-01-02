@@ -33,7 +33,6 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
 //        Log.d(bankObserver.lifecycle_tag, "OnCreate called")
 //        lifecycleState.text = "Activity is being created (onCreate)"
 
-
         initialBalance = savedInstanceState?.getDouble("balance") ?: 5000.95
 
         bank = BankAccount(
@@ -49,7 +48,7 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
         val withdrawButton: Button = view.findViewById(R.id.withdrawButton)
 
         // Sets the account holder value to the text view
-        val accountHolder = bank.getAccountHolder()
+        // val accountHolder = bank.getAccountHolder()
         val accountHolderTextView: TextView = view.findViewById(R.id.holderTextView)
         accountHolderTextView.text = "Account Holder: $username"
 
@@ -63,7 +62,7 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
             val amount = amountEditText.text.toString().toDouble()
             if (bank.deposit(amount)) {
                 accountBalance+=amount
-                accountBalanceTextView.text = "Balance: $${accountBalance}"
+                accountBalanceTextView.text = "Balance: $${"%.2f".format(accountBalance)}"
                 Toast.makeText(activity, "Deposit successful", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(
@@ -79,7 +78,7 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
             val amount = amountEditText.text.toString().toDouble()
             if (bank.withdraw(amount)) {
                 accountBalance-=amount
-                accountBalanceTextView.text = "Balance: $${accountBalance}"
+                accountBalanceTextView.text = "Balance: $${"%.2f".format(accountBalance)}"
                 Toast.makeText(activity, "Withdraw successful", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(activity, "Insufficient funds or invalid amount. Please enter a valid amount.", Toast.LENGTH_SHORT).show()

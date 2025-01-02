@@ -1,6 +1,7 @@
 package com.example.jrdeveloper
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() { // Change from ComponentActivity to AppCompatActivity to access supportFragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9,15 +10,18 @@ class MainActivity : AppCompatActivity() { // Change from ComponentActivity to A
 
         val loginFragment = LoginFragment()
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.flFragment, loginFragment)
-            .commit()
-
-//
-//      supportFragmentManager.beginTransaction()
-//          .replace(R.id.flFragment, secondFragment)
-//          .commit()
-//        }
+        if(savedInstanceState == null){
+            navigateToFragment(loginFragment)
         }
-
     }
+
+    fun navigateToFragment(fragment: Fragment, addBackToStack: Boolean = true){
+        val transaction = supportFragmentManager.beginTransaction()
+            .replace(R.id.flFragment, fragment)
+
+        if(addBackToStack){
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
+    }
+}
