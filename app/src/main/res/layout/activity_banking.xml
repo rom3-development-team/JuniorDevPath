@@ -7,55 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/holderTextView"
-        android:layout_width= "wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintTop_toTopOf= "parent"
-        app:layout_constraintBottom_toTopOf= "@id/balanceTextView"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/balanceTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintTop_toBottomOf= "@id/holderTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf= "@id/balanceTextView"/>
-
-    <EditText
-        android:id="@+id/amountEditText"
-        android:layout_width="wrap_content"
-        android:autofillHints=""
-        android:labelFor="@id/balanceTextView"
-        android:inputType="numberDecimal"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintTop_toBottomOf= "@id/balanceTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf= "@id/depositButton"
-        tools:ignore="LabelFor" />
-
-    <Button
-        android:id="@+id/depositButton"
-        android:layout_width= "wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintEnd_toEndOf= "parent"
-        app:layout_constraintTop_toBottomOf= "@id/amountEditText"
-        app:layout_constraintBottom_toTopOf= "@id/withdrawButton"/>
-
-    <Button
-        android:id="@+id/withdrawButton"
-        android:layout_width= "wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="296dp"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintTop_toBottomOf= "@id/depositButton"
-        app:layout_constraintBottom_toBottomOf= "parent"
-        app:layout_constraintEnd_toEndOf= "parent"/>
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
