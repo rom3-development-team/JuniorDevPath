@@ -37,17 +37,14 @@ class BankingFragment : Fragment(R.layout.fragment_banking) {
         accountHolderTextView.text = "Account Holder: $username"
 
         // Sets the account balance value to the text view
-        val initialBalance = bankingViewModel.balance.value ?: 0.0
-        accountBalanceTextView.text = "Balance: $${"%.2f".format(initialBalance)}"
+        // val initialBalance = bankingViewModel.balance.value ?: 0.0
+        // accountBalanceTextView.text = "Balance: $${"%.2f".format(initialBalance)}"
+        bankingViewModel.getBalance()
 
         // Observe balance changes from the ViewModel and update the UI
-        bankingViewModel.balance.observe(viewLifecycleOwner) { newBalance ->
-            accountBalanceTextView.text = "Balance: $${"%.2f".format(newBalance)}"
-        }
-
-        // Observe transaction message changes from the ViewModel
-        bankingViewModel.transactionMessage.observe(viewLifecycleOwner) { message ->
-            transactionMessageTextView.text = message
+        bankingViewModel.bankingViewState.observe(viewLifecycleOwner) { viewState ->
+            accountBalanceTextView.text = "Balance: $${"%.2f".format(viewState.balance)}"
+            transactionMessageTextView.text = viewState.transactionMessage
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.jrdeveloper
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
@@ -10,24 +11,30 @@ class BankingViewModel: ViewModel() {
         balance = 5000.95
     )
 
-    val balance: MutableLiveData<Double> = MutableLiveData(bank.getBalance())
-    val transactionMessage: MutableLiveData<String> = MutableLiveData("")
+    private val _bankingViewState: MutableLiveData<BankingViewState> = MutableLiveData(BankingViewState())
+    val bankingViewState: LiveData<BankingViewState> get() = _bankingViewState
 
     fun depositLogic(amount: Double){
         if (bank.deposit(amount)){
-            balance.value = bank.getBalance()
-             transactionMessage.value = "Deposit successful"
+            _bankingViewState.value = _bankingViewState.value?.copy(balance = bank.getBalance(), transactionMessage = "Deposit successful")
+
         } else {
-            transactionMessage.value = "Deposit must be greater than zero"
+            _bankingViewState.value = _bankingViewState.value?.copy(transactionMessage = "Deposit unsuccessful")
         }
     }
 
     fun withdrawLogic(amount: Double){
         if (bank.withdraw(amount)) {
-            balance.value = bank.getBalance()
-            transactionMessage.value = "Withdraw successful"
+            _bankingViewState.value = _bankingViewState.value?.copy(balance = bank.getBalance(), transactionMessage = "Withdraw successful")
         } else {
-           transactionMessage.value =  "Insufficient funds or invalid amount. Please enter a valid amount."
+            _bankingViewState.value = _bankingViewState.value?.copy(transactionMessage = "Insufficient funds or invalid amount. Please enter a valid amount.")
         }
     }
+
+    fun getBalance(){
+        _bankingViewState.value = _bankingViewState.value?.copy(balance = bank.getBalance())
+    }
+
+    data class BankingViewState(val balance: Double = 0.0, val transactionMessage: String = "")
+
 }
