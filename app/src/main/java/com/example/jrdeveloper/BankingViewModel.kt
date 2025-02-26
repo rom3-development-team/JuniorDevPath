@@ -20,9 +20,6 @@ class BankingViewModel: ViewModel() {
     // Allows the private _bankingUiState data to be accessed as read-only
     val bankingUiState: LiveData<BankingUiState> get() = _bankingUiState
 
-
-    // val transactionMessage: MutableLiveData<BankingUiState> = MutableLiveData("")
-
     fun depositLogic(amount: Double){
         if (bank.deposit(amount)){
             balance.value = bank.getBalance()
