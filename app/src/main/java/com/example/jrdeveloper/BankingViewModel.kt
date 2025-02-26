@@ -4,14 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
 class BankingViewModel: ViewModel() {
+
+    // Private mutable variable allows for only the ViewModel to modify the data
+    // bank accesses the BankAccount class with the following parameters
     private var bank = BankAccount(
         accountNumber = "1234",
         accountHolder = "Madelene Mejia",
         balance = 5000.95
     )
 
-    val balance: MutableLiveData<Double> = MutableLiveData(bank.getBalance())
-    val transactionMessage: MutableLiveData<String> = MutableLiveData("")
+    //
+    val balance: MutableLiveData<BankingUiState> = MutableLiveData(bank.getBalance())
+    val transactionMessage: MutableLiveData<BankingUiState> = MutableLiveData("")
 
     fun depositLogic(amount: Double){
         if (bank.deposit(amount)){
