@@ -10,7 +10,13 @@ import androidx.navigation.NavController
 class LoginViewModel: ViewModel() {
 
     val username: MutableLiveData<String> = MutableLiveData("")
+
+
+
     val password: MutableLiveData<String> = MutableLiveData("")
+
+
+
     var isValidCredentials: Boolean = false
 
     fun validateCredentials(username: String, password: String, navController: NavController) {
@@ -18,7 +24,7 @@ class LoginViewModel: ViewModel() {
             isValidCredentials = true
         } else {
             isValidCredentials = false
-            // error message
+            // error message 
         }
     }
 }
