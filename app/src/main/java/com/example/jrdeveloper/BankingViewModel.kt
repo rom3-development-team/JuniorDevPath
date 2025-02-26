@@ -14,7 +14,10 @@ class BankingViewModel: ViewModel() {
     )
 
     //
-    val balance: MutableLiveData<BankingUiState> = MutableLiveData(bank.getBalance())
+    var _bankingUiState: MutableLiveData<BankingUiState>
+    val bankingUiState:
+
+
     val transactionMessage: MutableLiveData<BankingUiState> = MutableLiveData("")
 
     fun depositLogic(amount: Double){
@@ -36,5 +39,5 @@ class BankingViewModel: ViewModel() {
     }
 }
 
-data class BankingUiState(var balance: Double = 0.0, var transactionMessage: String = "")
+data class BankingUiState(val balance: Double = 0.0, val transactionMessage: String = "")
 
