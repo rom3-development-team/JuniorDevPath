@@ -18,7 +18,7 @@ class BankingViewModel: ViewModel() {
     private var _bankingUiState: MutableLiveData<BankingUiState> = MutableLiveData(BankingUiState())
 
     // Allows the private _bankingUiState data to be accessed as read-only
-    val bankingUiState: LiveData<BankingUiState> = LiveData(_bankingUiState)
+    val bankingUiState: LiveData<BankingUiState> get() = _bankingUiState
 
 
     // val transactionMessage: MutableLiveData<BankingUiState> = MutableLiveData("")
