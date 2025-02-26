@@ -1,5 +1,6 @@
 package com.example.jrdeveloper
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
@@ -13,12 +14,14 @@ class BankingViewModel: ViewModel() {
         balance = 5000.95
     )
 
-    //
-    var _bankingUiState: MutableLiveData<BankingUiState>
-    val bankingUiState:
+    // Private mutable variable allows for only the ViewModel to modify the _bankingUiState data
+    private var _bankingUiState: MutableLiveData<BankingUiState> = MutableLiveData(BankingUiState())
+
+    // Allows the private _bankingUiState data to be accessed as read-only
+    val bankingUiState: LiveData<BankingUiState> = LiveData(_bankingUiState)
 
 
-    val transactionMessage: MutableLiveData<BankingUiState> = MutableLiveData("")
+    // val transactionMessage: MutableLiveData<BankingUiState> = MutableLiveData("")
 
     fun depositLogic(amount: Double){
         if (bank.deposit(amount)){
