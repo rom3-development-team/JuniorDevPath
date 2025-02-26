@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
 class BankingViewModel: ViewModel() {
-//    private var bank = BankAccount(
-//        accountNumber = "1234",
-//        accountHolder = "Madelene Mejia",
-//        balance = 5000.95
-//    )
+    private var bank = BankAccount(
+        accountNumber = "1234",
+        accountHolder = "Madelene Mejia",
+        balance = 5000.95
+    )
 
-    val balance: MutableLiveData<Double> = MutableLiveData(bankUiState.bank.getBalance())
+    val balance: MutableLiveData<Double> = MutableLiveData(bank.getBalance())
     val transactionMessage: MutableLiveData<String> = MutableLiveData("")
 
     fun depositLogic(amount: Double){
@@ -32,11 +32,5 @@ class BankingViewModel: ViewModel() {
     }
 }
 
-data class bankUiState(
-    private var bank: BankAccount = BankAccount(
-        accountNumber = "1234",
-        accountHolder = "Madelene Mejia",
-        balance = 5000.95
-    )
+data class BankingUiState(var balance: Double = 0.0, var transactionMessage: String = "")
 
-)
