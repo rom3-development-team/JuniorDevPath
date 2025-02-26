@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:padding="24dp"
+        android:textSize="30sp"
+        android:paddingTop="30dp"
         android:textStyle="bold"
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,70 +23,71 @@
         app:layout_constraintBottom_toTopOf="@id/balanceTextView"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+
     <TextView
         android:id="@+id/balanceTextView"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/holderTextView"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/transactionMessageTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/balanceTextView"/>
-
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/holderTextView" />
 
     <EditText
         android:id="@+id/amountEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
-        android:hint="@string/please_enter_an_amount"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
         android:background="@drawable/rounded_corner"
-        android:textSize="20sp"
-        android:padding="24dp"
-        android:labelFor="@id/balanceTextView"
+        android:hint="@string/please_enter_an_amount"
         android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintTop_toBottomOf= "@id/balanceTextView"
+        android:labelFor="@id/balanceTextView"
+        android:padding="24dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/depositButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf= "@id/depositButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/balanceTextView"
         tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/depositButton"
-        android:layout_width= "wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:padding="20dp"
         android:text="@string/deposit"
         android:textColor="#0936FF"
-        android:textStyle="bold"
         android:textSize="18sp"
-        android:padding="20dp"
-        android:backgroundTint="@color/white"
-        app:layout_constraintStart_toStartOf= "parent"
-        app:layout_constraintEnd_toEndOf= "parent"
-        app:layout_constraintTop_toBottomOf= "@id/amountEditText"
-        app:layout_constraintBottom_toTopOf= "@id/withdrawButton"/>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/withdrawButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amountEditText" />
 
     <Button
         android:id="@+id/withdrawButton"
-        android:layout_width= "wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:padding="20dp"
         android:text="@string/withdraw"
         android:textColor="#E4080A"
-        android:textStyle="bold"
         android:textSize="18sp"
-        android:padding="20dp"
-        android:backgroundTint="@color/white"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="296dp"
-        app:layout_constraintStart_toStartOf= "parent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf= "@id/depositButton"
-        app:layout_constraintBottom_toBottomOf= "parent"
-        app:layout_constraintEnd_toEndOf= "parent"/>
+        />
 
     <TextView
         android:id="@+id/LifecycleState"
@@ -95,6 +96,18 @@
         app:layout_constraintStart_toStartOf= "parent"
         app:layout_constraintTop_toTopOf= "parent"
         app:layout_constraintBottom_toTopOf= "@id/withdrawButton"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/transactionMessageTextView"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:paddingTop="30dp"
+        android:layout_width= "wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf= "parent"
+        app:layout_constraintTop_toTopOf= "@id/balanceTextView"
+        app:layout_constraintBottom_toTopOf= "@id/amountEditText"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 

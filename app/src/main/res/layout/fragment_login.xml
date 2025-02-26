@@ -65,7 +65,7 @@
             android:background="@drawable/rounded_corner"
             android:textColor="@color/purple_500"
             android:textSize="20sp"
-           />
+            />
 
         <TextView
             android:id="@+id/errorTextView"
@@ -78,7 +78,7 @@
             android:visibility="gone"
             android:paddingTop="30dp"/>
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
