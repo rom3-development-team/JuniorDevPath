@@ -1,20 +1,32 @@
 package com.example.jrdeveloper
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
+// Navigation between the Login Screen and the Banking Screen
 @Composable
 fun Navigation(){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDesination = Screen.MainScreen.route){
-//        composable(route = Screen.MainScreen.route){
-//            Activity_Banking(navController = navController)
-//        }
+
+    val loginViewModel: LoginViewModel = viewModel()
+    val bankingViewModel: BankingViewModel = viewModel()
+
+    // NavHost with start destination
+    NavHost(navController = navController, startDestination = Screen.LoginScreen.route){
         composable(route = Screen.LoginScreen.route){
-           // Login_Screen(navController = navController)
+            Login_Screen(
+                navController = navController,
+                viewModel = loginViewModel
+            )
         }
         composable(route = Screen.BankingScreen.route) {
-           // Banking_Screen(navController = navController)
+            Banking_Screen(
+                navController = navController,
+                viewModel = bankingViewModel
+            )
         }
     }
 }

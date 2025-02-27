@@ -1,27 +1,22 @@
 package com.example.jrdeveloper
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
 
 class MainActivity : AppCompatActivity() { // Change from ComponentActivity to AppCompatActivity to access supportFragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_banking)
 
-        val loginFragment = LoginFragment()
+        setContent {
+            Surface(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Navigation()
+            }
+        }
 
-        if(savedInstanceState == null){
-            navigateToFragment(loginFragment)
         }
     }
-
-    fun navigateToFragment(fragment: Fragment, addBackToStack: Boolean = true){
-        val transaction = supportFragmentManager.beginTransaction()
-            .replace(R.id.flFragment, fragment)
-
-        if(addBackToStack){
-            transaction.addToBackStack(null)
-        }
-        transaction.commit()
-    }
-}

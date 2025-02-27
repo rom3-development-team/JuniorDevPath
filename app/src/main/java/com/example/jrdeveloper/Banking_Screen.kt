@@ -10,31 +10,34 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 
 @Composable
-fun Banking_Screen(holderText: String, balanceText: String, transactionMessageText: String, modifier: Modifier = Modifier) {
+fun Banking_Screen(viewModel: BankingViewModel, navController: NavHostController) {
+    val bankingUiState by viewModel.bankingUiState.observeAsState()
 
-    var enterAmountTextField by remember { mutableStateOf(TextFieldValue("")) }
+   var enteredAmountTextField by remember { mutableStateOf(TextFieldValue("")) }
+    val enteredAmount = enteredAmountTextField.toString().toDoubleOrNull() ?: 0.0
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
     ){
         Text(
-            text = holderText,
+            text = viewModel.getAccountHolder().toString(),
             modifier = Modifier
                 .padding(28.dp)
                 .testTag("holderText"),
@@ -43,7 +46,7 @@ fun Banking_Screen(holderText: String, balanceText: String, transactionMessageTe
         )
 
         Text(
-            text = balanceText,
+            text = viewModel.getBalance().toString(),
             modifier = Modifier
                 .padding(28.dp)
                 .testTag("balanceText"),
@@ -51,29 +54,37 @@ fun Banking_Screen(holderText: String, balanceText: String, transactionMessageTe
             color = Color.Black
         )
 
-        Text(
-            modifier = Modifier
-                .padding(28.dp)
-                .testTag("transactionMessageText"),
-            text = transactionMessageText,
-            fontSize = 24.sp,
-            color = Color.Black
+        bankingUiState?.let {
+            Text(
+                modifier = Modifier
+                    .padding(28.dp)
+                    .testTag("transactionMessageText"),
+                text = it.transactionMessage,
+                fontSize = 24.sp,
+                color = Color.Black
+            )
+        }
+
+        OutlinedTextField(
+            value = enteredAmountTextField,
+            onValueChange = { enteredAmountTextField = it },
+            label = { Text("Enter Amount" )},
+            placeholder = { Text("Enter the amount you would like to withdraw or deposit")}
         )
-        FilledTonalButton(onClick = {}) {
+
+        FilledTonalButton(onClick = {
+            viewModel.withdrawLogic(enteredAmount)
+        }) {
             Text("Withdraw")
         }
 
-        FilledTonalButton(onClick = {}) {
+        FilledTonalButton(onClick = {
+            viewModel.depositLogic(enteredAmount)
+        }) {
             Text("Deposit")
         }
     }
-    // Amount TextField
-    OutlinedTextField(
-        value = enterAmountTextField,
-        onValueChange = { enterAmountTextField = it },
-        label = { Text("Enter Amount" )},
-        placeholder = { Text("Enter the amount you would like to withdraw or deposit")}
-    )
+
 
 }
 //

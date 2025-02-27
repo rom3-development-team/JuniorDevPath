@@ -13,6 +13,7 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -23,43 +24,42 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 
 @Composable
-fun Login_Screen(navController: navController, modifier: Modifier = Modifier) {
-    val login_icon = painterResource(R.drawable.icon_account_circle)
-    val login_background = painterResource(R.drawable.login_background)
+fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
 
+    val loginUiState by viewModel.loginUiState.observeAsState()
     var username by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf(TextFieldValue("")) }
+    var isValid by remember { mutableStateOf(false) }
 
 
     Box(
-        modifier = Modifier.fillMaxSize()
+    modifier = Modifier.fillMaxSize()
     ) {
-        Image(
-            painter = login_background,
-            contentDescription = null
-        )
+//        Image(
+//            painter = login_background,
+//            contentDescription = null
+//        )
 
 
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
         ) {
-            Image(
-                painter = login_icon,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                alpha = 0.5F
-            )
+//            Image(
+//                painter = login_icon,
+//                contentDescription = null,
+//                contentScale = ContentScale.Crop,
+//                alpha = 0.5F
+//            )
 
-            FilledTonalButton(onClick = {}) {
-                Text("Login")
-            }
+
             OutlinedTextField(
                 value = username,
                 label = { Text(text = "Enter Username") },
@@ -77,9 +77,19 @@ fun Login_Screen(navController: navController, modifier: Modifier = Modifier) {
                 onValueChange = { password = it }
             )
 
+            FilledTonalButton(onClick = {
+                if (viewModel.validateCredentials(username.toString(), password.toString())) {
+                    navController.navigate(Screen.BankingScreen.route)
+                }
+            }) {
+
+                Text("Login")
+            }
+
+                }
+            }
         }
-    }
-}
+
 
 //@Preview(showBackground = true)
 //@Composable
