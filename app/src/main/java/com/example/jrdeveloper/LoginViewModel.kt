@@ -15,10 +15,9 @@ class LoginViewModel: ViewModel() {
 
     fun validateCredentials(username: String, password: String) {
         if (username == "admin" && password == "password") {
-            _loginUiState.value = _loginUiState.value?.copy(isValid = true, error = null)
+            _loginUiState.value = _loginUiState.value?.copy(isValid = true)
         } else {
-            _loginUiState.value =
-                _loginUiState.value?.copy(isValid = false, error = "Invalid credentials")
+            _loginUiState.value = _loginUiState.value?.copy(isValid = false, error = "Invalid credentials")
         }
     }
 }
@@ -28,6 +27,6 @@ class LoginViewModel: ViewModel() {
 data class LoginUiState(
     val username: String = "",
     val password: String = "",
-    val error: String? = null,
+    val error: String = "",
     val isValid: Boolean = false
 )

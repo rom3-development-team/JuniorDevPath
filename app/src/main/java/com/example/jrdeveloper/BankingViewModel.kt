@@ -27,7 +27,7 @@ class BankingViewModel: ViewModel() {
         // If we call the deposit method with a value passed in the parameter for the amount...
         if (bank.deposit(amount)){
             // The _bankingUiState (Mutable Live Date) value is set to the updated balance and transaction message
-            _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance(), transactionMessage = "Deposit successful")
+            _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance(), transactionMessage = "Deposit Successful!")
         } else {
             // The balance remains unchanged and the transaction message is updated
             _bankingUiState.value = _bankingUiState.value?.copy(transactionMessage = "Deposit must be greater than 0")
@@ -39,7 +39,7 @@ class BankingViewModel: ViewModel() {
         // If we call the withdraw method with a value passed in the parameter for the amount...
         if (bank.withdraw(amount)) {
             // The _bankingUiState (Mutable Live Data) value is set to the updated balance and transaction message
-            _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance(), transactionMessage = "Withdraw Unsuccessful")
+            _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance(), transactionMessage = "Withdraw Successful!")
         } else {
             // The balance remains unchanged and the transaction message is updated
            _bankingUiState.value = _bankingUiState.value?.copy(transactionMessage = "Insufficient funds or invalid amount. Please enter a valid amount.")
@@ -48,9 +48,9 @@ class BankingViewModel: ViewModel() {
 
     // Gets the balance of the _bankingUiState
     fun getBalance(){
-        _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance())
+//        _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance())
 
-//        _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance(), needInitialBalance = false)
+        _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance(), needInitialBalance = false)
     }
 
     fun getAccountHolder(){
@@ -63,7 +63,7 @@ class BankingViewModel: ViewModel() {
 data class BankingUiState(
     val balance: Double = 0.0,
     val transactionMessage: String = "",
-    val accountHolder: String = ""
-//    val needInitialBalance: Boolean = true
+    val accountHolder: String = "",
+    val needInitialBalance: Boolean = true
 )
 

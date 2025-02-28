@@ -50,9 +50,15 @@ fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
     var password by remember { mutableStateOf("") }
 
     val login_background = painterResource(id = R.drawable.galaxy_background)
+//
+//    if (loginUiState.isValid) {
+//        LaunchedEffect(Unit) {
+//            navController.navigate(Screen.BankingScreen.route)
+//        }
+//    }
 
-    if (loginUiState.isValid) {
-        LaunchedEffect(Unit) {
+    LaunchedEffect(loginUiState.isValid) {
+        if (loginUiState.isValid){
             navController.navigate(Screen.BankingScreen.route)
         }
     }
@@ -125,6 +131,15 @@ fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
                     )
                 )
             }
+            Text(
+                text = loginUiState.error.toString(),
+                color = Color.White,
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Serif,
+                modifier = Modifier
+                    .padding(16.dp)
+            )
 
         }
     }

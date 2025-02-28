@@ -16,6 +16,5 @@ class MainActivity : AppCompatActivity() { // Change from ComponentActivity to A
                 Navigation()
             }
         }
-
-        }
     }
+}

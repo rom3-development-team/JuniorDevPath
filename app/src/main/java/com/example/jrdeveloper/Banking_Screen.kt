@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,81 +35,80 @@ import androidx.navigation.NavHostController
 fun Banking_Screen(viewModel: BankingViewModel, navController: NavHostController) {
     val bankingUiState by viewModel.bankingUiState.observeAsState(BankingUiState())
 
-   var enteredAmountTextField by remember { mutableStateOf(TextFieldValue("")) }
+   var enteredAmountTextField by remember { mutableStateOf("") }
     val enteredAmount = enteredAmountTextField.toString().toDoubleOrNull() ?: 0.0
-//
-//    if (bankingUiState.needInitialBalance) {
-//        viewModel.getBalance()
-//    }
 
-    // val login_background = painterResource(id = R.drawable.galaxy_background )
+    if (bankingUiState.needInitialBalance) {
+        viewModel.getBalance()
+        viewModel.getAccountHolder()
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-//        Image(
-//            painter = login_background,
-//            contentDescription = null,
-//            Modifier.fillMaxSize(),
-//            contentScale = ContentScale.Crop,
-////            alpha = 0.8F
-//        )
 
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp)
+//                .padding(8.dp)
         ) {
             Text(
-                text = bankingUiState.accountHolder,
+                text = "Hello, " + bankingUiState.accountHolder,
                 modifier = Modifier
-                    .padding(28.dp)
+                    .padding(8.dp)
                     .testTag("holderText"),
                 fontSize = 30.sp,
+                fontFamily = FontFamily.Serif,
                 color = Color.Black
             )
 
             Text(
-                text = bankingUiState.balance.toString(),
+                text = "$" + bankingUiState.balance.toString(),
                 modifier = Modifier
-                    .padding(28.dp)
+                    .padding(8.dp)
                     .testTag("balanceText"),
-                fontSize = 34.sp,
+                fontSize = 40.sp,
+                fontFamily = FontFamily.Serif,
                 color = Color.Black
             )
 
+            Spacer(Modifier.height(8.dp))
+
             Text(
                 modifier = Modifier
-                    .padding(28.dp)
+                    .padding(8.dp)
                     .testTag("transactionMessageText"),
                 text = bankingUiState.transactionMessage,
                 fontSize = 24.sp,
-                color = Color.Black
+                fontFamily = FontFamily.Serif,
+                color = Color.Red
             )
+
+            Spacer(Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = enteredAmountTextField,
                 onValueChange = { enteredAmountTextField = it },
-                label = { Text("Enter Amount") },
-                placeholder = { Text("Enter the amount you would like to withdraw or deposit") }
+                label = { Text("Enter Amount", fontFamily = FontFamily.Serif, fontSize = 30.sp) },
+                placeholder = { Text("Enter an amount") }
             )
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(30.dp))
 
             FilledTonalButton(onClick = {
                 viewModel.withdrawLogic(enteredAmount)
             }) {
-                Text("Withdraw")
+                Text("Withdraw", fontFamily = FontFamily.Serif, fontSize = 30.sp)
             }
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(20.dp))
 
             FilledTonalButton(onClick = {
                 viewModel.depositLogic(enteredAmount)
             }) {
-                Text("Deposit")
+                Text("Deposit", fontFamily = FontFamily.Serif, fontSize = 30.sp)
             }
         }
     }
