@@ -51,11 +51,14 @@ fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
 
     val login_background = painterResource(id = R.drawable.galaxy_background)
 
-    if (loginUiState.isValid){
-        navController.navigate(Screen.BankingScreen.route)
+    if (loginUiState.isValid) {
+        LaunchedEffect(Unit) {
+            navController.navigate(Screen.BankingScreen.route)
+        }
     }
 
     Box {
+
 
         Image(
             painter = login_background,
@@ -109,25 +112,7 @@ fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
            Spacer(Modifier.height(20.dp))
 
             FilledTonalButton(onClick = {
-                viewModel.validateCredentials(username.toString(), password.toString())
-
-             //   viewModel.validateCredentials(username.toString(), password.toString())
-
-
-                // Attempt # 1
-//            {
-//            val isValidated = viewModel.validateCredentials(username.toString(), password.toString())
-//                if(isValidated){
-//                    navController.navigate(Screen.BankingScreen.route)
-//                }
-
-                // Attempt # 2 (TEST)
-//            {
-//                val yes = true
-//                viewModel.validateCredentials(username.toString(), password.toString())
-//                if (yes) {
-//                    navController.navigate(Screen.BankingScreen.route)
-//                }
+                viewModel.validateCredentials(username, password)
             }) {
                 Text(text = "Login",
                     style = TextStyle(

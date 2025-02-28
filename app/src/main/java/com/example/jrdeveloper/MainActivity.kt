@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 class MainActivity : AppCompatActivity() { // Change from ComponentActivity to AppCompatActivity to access supportFragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize()

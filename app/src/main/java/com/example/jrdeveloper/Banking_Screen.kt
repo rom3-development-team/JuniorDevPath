@@ -36,10 +36,10 @@ fun Banking_Screen(viewModel: BankingViewModel, navController: NavHostController
 
    var enteredAmountTextField by remember { mutableStateOf(TextFieldValue("")) }
     val enteredAmount = enteredAmountTextField.toString().toDoubleOrNull() ?: 0.0
-
-    if (bankingUiState.needInitialBalance) {
-        viewModel.getBalance()
-    }
+//
+//    if (bankingUiState.needInitialBalance) {
+//        viewModel.getBalance()
+//    }
 
     // val login_background = painterResource(id = R.drawable.galaxy_background )
 
