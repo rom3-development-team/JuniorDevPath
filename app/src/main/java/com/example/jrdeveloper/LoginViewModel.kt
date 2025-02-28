@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
 
 class LoginViewModel: ViewModel() {
 
@@ -14,20 +13,21 @@ class LoginViewModel: ViewModel() {
     private var _loginUiState: MutableLiveData<LoginUiState> = MutableLiveData(LoginUiState())
     val loginUiState: LiveData<LoginUiState> get() = _loginUiState
 
-    fun validateCredentials(username: String, password: String): Boolean {
+    fun validateCredentials(username: String, password: String) {
         if (username == "admin" && password == "password") {
-            _loginUiState.value = _loginUiState.value?.copy(username = "admin", password = "password")
-            return true
+            _loginUiState.value = _loginUiState.value?.copy(isValid = true, error = null)
         } else {
-            _loginUiState.value = _loginUiState.value?.copy(error = "Invalid credentials")
-            return false
+            _loginUiState.value =
+                _loginUiState.value?.copy(isValid = false, error = "Invalid credentials")
         }
     }
 }
+
 
 // Holds the data variables (username and password) for the LoginUiState class
 data class LoginUiState(
     val username: String = "",
     val password: String = "",
-    val error: String = ""
+    val error: String? = null,
+    val isValid: Boolean = false
 )

@@ -1,49 +1,68 @@
 package com.example.jrdeveloper
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 
 
 @Composable
 fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
 
-    val loginUiState by viewModel.loginUiState.observeAsState()
-    var username by remember { mutableStateOf(TextFieldValue("")) }
-    var password by remember { mutableStateOf(TextFieldValue("")) }
-    var isValid by remember { mutableStateOf(false) }
+    val loginUiState by viewModel.loginUiState.observeAsState(LoginUiState())
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
+    val login_background = painterResource(id = R.drawable.galaxy_background)
 
-    Box(
-    modifier = Modifier.fillMaxSize()
-    ) {
-//        Image(
-//            painter = login_background,
-//            contentDescription = null
-//        )
+    if (loginUiState.isValid){
+        navController.navigate(Screen.BankingScreen.route)
+    }
 
+    Box {
+
+        Image(
+            painter = login_background,
+            contentDescription = null,
+            Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+        )
 
         Column(
             verticalArrangement = Arrangement.Center,
@@ -52,44 +71,79 @@ fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
                 .fillMaxSize()
                 .padding(8.dp)
         ) {
-//            Image(
-//                painter = login_icon,
-//                contentDescription = null,
-//                contentScale = ContentScale.Crop,
-//                alpha = 0.5F
-//            )
+            Text(
+                text = "Sign In",
+                color = Color.White,
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+               fontFamily = FontFamily.Serif,
+                modifier = Modifier
+                    .padding(16.dp)
+            )
+
+            Spacer(Modifier.height(20.dp))
 
 
             OutlinedTextField(
                 value = username,
-                label = { Text(text = "Enter Username") },
-                placeholder = { Text(text="Enter your username")},
+               // label = { Text(text = "Username", color = Color.Black) } ,
+                placeholder = { Text(text = "Username", color = Color.White, fontFamily = FontFamily.Serif)},
+                textStyle = TextStyle(color = Color.White),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                onValueChange = { username = it }
+                onValueChange = { username = it },
             )
+
+            Spacer(Modifier.height(16.dp))
+
 
             OutlinedTextField(
                 value = password,
-                label = { Text(text = "Enter Password")},
-                placeholder = {Text(text="Enter your password")},
+               // label = { Text(text = "Enter Password", color = Color.White) },
+                placeholder = { Text(text = "Password", color = Color.White, fontFamily = FontFamily.Serif)},
                 visualTransformation = PasswordVisualTransformation(),
+                textStyle = TextStyle(color = Color.White),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 onValueChange = { password = it }
             )
 
+           Spacer(Modifier.height(20.dp))
+
             FilledTonalButton(onClick = {
-                if (viewModel.validateCredentials(username.toString(), password.toString())) {
-                    navController.navigate(Screen.BankingScreen.route)
-                }
+                viewModel.validateCredentials(username.toString(), password.toString())
+
+             //   viewModel.validateCredentials(username.toString(), password.toString())
+
+
+                // Attempt # 1
+//            {
+//            val isValidated = viewModel.validateCredentials(username.toString(), password.toString())
+//                if(isValidated){
+//                    navController.navigate(Screen.BankingScreen.route)
+//                }
+
+                // Attempt # 2 (TEST)
+//            {
+//                val yes = true
+//                viewModel.validateCredentials(username.toString(), password.toString())
+//                if (yes) {
+//                    navController.navigate(Screen.BankingScreen.route)
+//                }
             }) {
+                Text(text = "Login",
+                    style = TextStyle(
+                        fontSize = 24.sp,
+                        shadow = Shadow(
+                            color = Color.Blue,
+                            blurRadius = 5f
+                        )
 
-                Text("Login")
+                    )
+                )
             }
 
-                }
-            }
         }
-
+    }
+}
 
 //@Preview(showBackground = true)
 //@Composable

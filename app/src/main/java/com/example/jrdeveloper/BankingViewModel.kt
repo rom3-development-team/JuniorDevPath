@@ -48,7 +48,7 @@ class BankingViewModel: ViewModel() {
 
     // Gets the balance of the _bankingUiState
     fun getBalance(){
-        _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance())
+        _bankingUiState.value = _bankingUiState.value?.copy(balance = bank.getBalance(), needInitialBalance = false)
     }
 
     fun getAccountHolder(){
@@ -61,6 +61,7 @@ class BankingViewModel: ViewModel() {
 data class BankingUiState(
     val balance: Double = 0.0,
     val transactionMessage: String = "",
-    val accountHolder: String = ""
+    val accountHolder: String = "" ,
+    val needInitialBalance: Boolean = true
 )
 
