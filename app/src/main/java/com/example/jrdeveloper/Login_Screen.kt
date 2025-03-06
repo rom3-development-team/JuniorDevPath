@@ -1,7 +1,6 @@
 package com.example.jrdeveloper
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,23 +8,20 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
@@ -35,17 +31,18 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.example.jrdeveloper.appnavigation.Screen
+import com.example.jrdeveloper.data.LoginUiState
+import com.example.jrdeveloper.viewmodel.LoginViewModel
 
 
 @Composable
 fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
 
-    val loginUiState by viewModel.loginUiState.observeAsState(LoginUiState())
+    val loginUiState by viewModel.loginUiState.collectAsState()
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -118,7 +115,7 @@ fun Login_Screen(viewModel: LoginViewModel, navController: NavHostController) {
            Spacer(Modifier.height(20.dp))
 
             FilledTonalButton(onClick = {
-                viewModel.validateCredentials(username, password)
+                viewModel.fetchValidateCredentials(username, password)
             }) {
                 Text(text = "Login",
                     style = TextStyle(

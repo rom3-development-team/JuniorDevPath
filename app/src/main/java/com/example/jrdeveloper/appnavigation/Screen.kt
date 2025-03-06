@@ -1,4 +1,4 @@
-package com.example.jrdeveloper
+package com.example.jrdeveloper.appnavigation
 
 sealed class Screen(val route: String) {
     object LoginScreen : Screen(route = "login_screen")

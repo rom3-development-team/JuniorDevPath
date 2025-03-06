@@ -1,12 +1,21 @@
 package com.example.jrdeveloper
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.example.jrdeveloper.appnavigation.Navigation
+import com.example.jrdeveloper.data.BankingRepository
+import com.example.jrdeveloper.viewmodel.BankingViewModel
+import com.example.jrdeveloper.viewmodel.LoginViewModel
 
 class MainActivity : AppCompatActivity() { // Change from ComponentActivity to AppCompatActivity to access supportFragmentManager
+
+//    private val loginViewModel: LoginViewModel by viewModels()
+//    private val bankingViewModel: BankingViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
